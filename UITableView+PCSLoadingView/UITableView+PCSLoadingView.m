@@ -22,40 +22,41 @@
 //==================================================
 
 - (UITextView *)_pcsStatusTextView {
-    UITextView *textView = objc_getAssociatedObject(self, kUITableView_PCSLoadingView_StatusTextViewKey);
-    if (! textView) {
-        textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 2 * self.rowHeight + 1, self.frame.size.width, self.rowHeight - 2)];
-        textView.userInteractionEnabled = NO;
-        textView.editable = NO;
-        textView.selectable = NO;
-        textView.contentMode = UIViewContentModeCenter;
-        
-        textView.textAlignment = NSTextAlignmentCenter;
-        textView.font = [UIFont boldSystemFontOfSize:17];
-        textView.textColor = [UIColor colorWithWhite:0.5 alpha:1];
-        
-        textView.hidden = YES;
-        
-        [self _pcsSetStatusTextView:textView];
-        [self addSubview:textView];
-    }
-    return textView;
+   UITextView *textView = objc_getAssociatedObject(self, kUITableView_PCSLoadingView_StatusTextViewKey);
+   if (! textView) {
+      textView = [[UITextView alloc] initWithFrame:CGRectMake(0, 2 * self.rowHeight + 1, self.frame.size.width, self.rowHeight - 2)];
+      textView.userInteractionEnabled = NO;
+      textView.editable = NO;
+      textView.selectable = NO;
+      textView.contentMode = UIViewContentModeCenter;
+      
+      textView.textAlignment = NSTextAlignmentCenter;
+      textView.font = [UIFont boldSystemFontOfSize:17];
+      textView.textColor = [UIColor colorWithWhite:0.5 alpha:1];
+      
+      textView.hidden = YES;
+      textView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+      
+      [self _pcsSetStatusTextView:textView];
+      [self addSubview:textView];
+   }
+   return textView;
 }
 
 - (void)_pcsSetStatusTextView:(UITextView *)statusTextView {
-    objc_setAssociatedObject(self, kUITableView_PCSLoadingView_StatusTextViewKey, statusTextView, OBJC_ASSOCIATION_RETAIN);
+   objc_setAssociatedObject(self, kUITableView_PCSLoadingView_StatusTextViewKey, statusTextView, OBJC_ASSOCIATION_RETAIN);
 }
 
 - (void)_pcsShowStatusTextViewWithText:(NSString *)text {
-    UITextView *statusTextView = [self _pcsStatusTextView];
-    statusTextView.hidden = NO;
-    statusTextView.text = text;
-    
-    CGRect textRect = [text boundingRectWithSize:statusTextView.frame.size options:NSStringDrawingUsesLineFragmentOrigin
-                                      attributes:@{ NSFontAttributeName : statusTextView.font }
-                                         context:NULL];
-    int textHeight = textRect.size.height;
-    statusTextView.textContainerInset = UIEdgeInsetsMake((statusTextView.frame.size.height - textHeight) / 2, kMargin, 0, kMargin);
+   UITextView *statusTextView = [self _pcsStatusTextView];
+   statusTextView.hidden = NO;
+   statusTextView.text = text;
+   
+   CGRect textRect = [text boundingRectWithSize:statusTextView.frame.size options:NSStringDrawingUsesLineFragmentOrigin
+                                     attributes:@{ NSFontAttributeName : statusTextView.font }
+                                        context:NULL];
+   int textHeight = textRect.size.height;
+   statusTextView.textContainerInset = UIEdgeInsetsMake((statusTextView.frame.size.height - textHeight) / 2, kMargin, 0, kMargin);
 }
 
 //==================================================
@@ -63,24 +64,24 @@
 //==================================================
 
 - (NSString *)pcsLoadingViewText {
-    NSString *text = objc_getAssociatedObject(self, kUITableView_PCSLoadingView_LoadingViewTextKey);
-    if (! text) {
-        text = @"Loading...";
-        [self setPcsLoadingViewText:text];
-    }
-    return text;
+   NSString *text = objc_getAssociatedObject(self, kUITableView_PCSLoadingView_LoadingViewTextKey);
+   if (! text) {
+      text = @"Loading...";
+      [self setPcsLoadingViewText:text];
+   }
+   return text;
 }
 
 - (void)setPcsLoadingViewText:(NSString *)pcsLoadingViewText {
-    objc_setAssociatedObject(self, kUITableView_PCSLoadingView_LoadingViewTextKey, pcsLoadingViewText, OBJC_ASSOCIATION_RETAIN);
+   objc_setAssociatedObject(self, kUITableView_PCSLoadingView_LoadingViewTextKey, pcsLoadingViewText, OBJC_ASSOCIATION_RETAIN);
 }
 
 - (void)pcsShowLoadingView {
-    [self _pcsShowStatusTextViewWithText:[self pcsLoadingViewText]];
+   [self _pcsShowStatusTextViewWithText:[self pcsLoadingViewText]];
 }
 
 - (void)pcsHideLoadingView {
-    [self _pcsStatusTextView].hidden = YES;
+   [self _pcsStatusTextView].hidden = YES;
 }
 
 //==================================================
@@ -88,24 +89,24 @@
 //==================================================
 
 - (NSString *)pcsNoDataViewText {
-    NSString *text = objc_getAssociatedObject(self, kUITableView_PCSLoadingView_NoDataViewTextKey);
-    if (! text) {
-        text = @"No Results";
-        [self setPcsNoDataViewText:text];
-    }
-    return text;
+   NSString *text = objc_getAssociatedObject(self, kUITableView_PCSLoadingView_NoDataViewTextKey);
+   if (! text) {
+      text = @"No Results";
+      [self setPcsNoDataViewText:text];
+   }
+   return text;
 }
 
 - (void)setPcsNoDataViewText:(NSString *)pcsNoDataViewText {
-    objc_setAssociatedObject(self, kUITableView_PCSLoadingView_NoDataViewTextKey, pcsNoDataViewText, OBJC_ASSOCIATION_RETAIN);
+   objc_setAssociatedObject(self, kUITableView_PCSLoadingView_NoDataViewTextKey, pcsNoDataViewText, OBJC_ASSOCIATION_RETAIN);
 }
 
 - (void)pcsShowNoDataView {
-    [self _pcsShowStatusTextViewWithText:[self pcsNoDataViewText]];
+   [self _pcsShowStatusTextViewWithText:[self pcsNoDataViewText]];
 }
 
 - (void)pcsHideNoDataView {
-    [self _pcsStatusTextView].hidden = YES;
+   [self _pcsStatusTextView].hidden = YES;
 }
 
 @end
