@@ -21,5 +21,6 @@
 
 - (void)pcsShowNoDataView;
 - (void)pcsHideNoDataView;
+- (void)pcsUpdateNoDataView; // shows or hides based on number of cells
 
 @end

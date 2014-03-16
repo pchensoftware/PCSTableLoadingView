@@ -109,4 +109,11 @@
    [self _pcsStatusTextView].hidden = YES;
 }
 
+- (void)pcsUpdateNoDataView {
+   if ([[self indexPathsForVisibleRows] count] == 0)
+      [self pcsShowNoDataView];
+   else
+      [self pcsHideNoDataView];
+}
+
 @end
